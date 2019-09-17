@@ -1,0 +1,32 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+#header{
+    color :white;
+    text-align: center;
+    background: #0FACF3;
+}
+#search
+{
+    width: 30vw;
+}
+input[type="text"]
+{   color: white;
+    border-radius: 30px;
+    box-shadow: 4px 4px 4px rgba(244, 21, 222, 0.38);
+    border:none;
+    width: 100%;
+    background: linear-gradient(90deg, #448FA3 3.12%, rgba(83, 99, 246, 0.66) 100%);
+}
+canvas
+{   width: 100vw;
+    height: 50vh;
+    background: linear-gradient(114.47deg, #00559F -0.41%, rgba(159, 0, 124, 0.91) 100.03%);
+}
+#footer
+{   color: white;
+    text-align: center;
+    background: #02182B;
+}
