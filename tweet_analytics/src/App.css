@@ -3,17 +3,29 @@
     margin: 0;
     padding: 0;
 }
+#app
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+#graph
+{
+    justify-self: center;
+}
 #header{
     color :white;
     text-align: center;
     background: #0FACF3;
 }
 #search
-{
+{   color: white;
     width: 30vw;
+    display: flex;
+    align-self: center;
 }
 input[type="text"]
-{   color: white;
+{   color: #ffffff;
     border-radius: 30px;
     box-shadow: 4px 4px 4px rgba(244, 21, 222, 0.38);
     border:none;
