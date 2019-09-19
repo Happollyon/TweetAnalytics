@@ -1,6 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-
+import ReactDOM from 'react'
 import Header from './components/Header'
 import Footer from "./components/Footer";
 import Search from "./components/Search";
@@ -10,6 +9,7 @@ function App()
 {
     return(
         <div id='app'>
+
         <Header/>
         <Search />
         <GraphGenerator/>

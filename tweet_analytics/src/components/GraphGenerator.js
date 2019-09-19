@@ -1,6 +1,6 @@
 import React , {Component} from 'react'
 
-
+import * as Chart from 'chart.js'
 class GraphGenerator extends Component
 {
 constructor ()
@@ -13,19 +13,21 @@ constructor ()
         }
     this.recover = this.recover.bind(this)
     this.plot= this.plot.bind(this)
+
+
 }
 recover()
 {
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://api.twitter.com/1.1/statuses/user_timeline.json?count=200&screen_name=u2"
+    const url = "https://api.twitter.com/1.1/statuses/user_timeline.json?count=50&screen_name=luscas"
 fetch(proxyurl + url,
     {
     method: "GET",
         headers :
             {
-                'Authorization':' Bearer AAAAAAAAAAAAAAAAAAAAABEmAAEAAAAAk%2B0QCzyK88Du%2F5kzJkvMoiHaoZ4%3DYicmiHcDfgq1r535ZGPR1XZTUcDOZuVyu8e4DPfFb0BWbaeZ8R'
-            ,'Content-Type': 'application/json',
-            'Accept': 'application/json'
+                'Authorization':'Bearer AAAAAAAAAAAAAAAAAAAAAGteAAEAAAAAlBECXFS19ucbvpSIqafMdiJltHI%3DhyY8Cy2EPF9d0WQz8xO3QJj6WXTBJPlGGEoJH8o5fjs6wNBjZm'
+                ,'Content-Type': 'application/json',
+                'Accept': 'application/json'
         }
 
     })
@@ -33,35 +35,41 @@ fetch(proxyurl + url,
     .then(response=>
     {
         this.setState({tweets:response})
-
+        console.log(response)
     })
 
 }
 
 plot()
-{
+{ var values =this.state.tweets.map(tweet=>tweet.favorite_count)
+    var lable = this.state.tweets.map(tweet=>tweet.created_at)
 
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
-     var width = c.width / this.state.tweets.length
-    var width2= width
-    var height  = c.height/ Math.max.apply(Math, this.state.tweets.map(function(o) { return o.favorite_count; }))
-    alert(height)
-    ctx.strokeStyle='solid #fff'
-    ctx.translate(0, c.height);
-    ctx.scale(1, -1);
-    ctx.moveTo(0,0);
-    this.state.tweets.map(tweet=>
-        {
-            ctx.lineTo(width,tweet.favorite_count*height)
-            width = width + width2
-        }
-    )
-
-    ctx.stroke();
-    ctx.fill()
 
 
+
+        var chart =  new  Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: lable,
+            datasets: [{
+                label: 'likes',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: values,
+
+            }]
+
+        },
+
+        // Configuration options go here
+        options: {mode:'point'}
+    });
+    console.log(ctx.data)
 }
 
 
@@ -69,6 +77,7 @@ plot()
 render(){
 
     return(<div id='graph'>
+            {this.state.tweets.map(tweet=>tweet.favorite_count+',')}
             <button onClick={this.plot}>click</button>
             <canvas id='canvas'  onClick={this.recover}>
 
